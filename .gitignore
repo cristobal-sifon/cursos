@@ -1,0 +1,13 @@
+# carpetas
+aux
+data
+entregas
+papers
+presentaciones*
+recursos
+tareas_data
+
+# archivos genericos
+*.ipynb_checkpoints
+.DS_Store
+helper.ipynb
