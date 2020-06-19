@@ -13084,7 +13084,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>El objetivo de esta tarea es analizar un mapa ficticio del CMB e identificar los parámetros cosmológicos usados para generarlo. Para esto deberán utilizar <code>CAMB</code> (<a href="https://camb.info/">https://camb.info/</a>), en cualquiera de sus versiones.</p>
+<p>El objetivo de esta tarea es producir y analizar un mapa ficticio del CMB e identificar los parámetros cosmológicos usados para generarlo. Para esto deberán utilizar <code>CAMB</code> (<a href="https://camb.info/">https://camb.info/</a>), en cualquiera de sus versiones.</p>
 
 </div>
 </div>
@@ -13093,7 +13093,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Parte-1.-Generar-un-mapa-del-CMB">Parte 1. Generar un mapa del CMB<a class="anchor-link" href="#Parte-1.-Generar-un-mapa-del-CMB">&#182;</a></h2><p>Para esta tarea deberán usar el espectro angular de potencias de temperatura provisto junto con este enunciado, disponible en el repositorio del curso, que se muestra a continuación:</p>
-<p><img src="./D_ell.png"></p>
+<p><img src="D_ell.png"></p>
 
 </div>
 </div>
@@ -13131,7 +13131,7 @@ $$
 \mathbf{\tilde G}(\ell_x,\ell_y) =
     \int d\ell_x \int d\ell_y \exp\left[-2i(\vec\ell\cdot\vec\theta)\right] \, \mathcal{N}(\mu,\sigma)
 $$<p>(Para el valor de $\sigma$, consideren que éste determina la amplitud de las fluctuaciones <em>respecto del espectro de potencias $C_\ell$</em>.) Deberían obtener una imagen similar (pero no idéntica) la que se muestra a continuación:</p>
-<p><img src="./cmb_Tmap.png"></p>
+<p><img src="cmb_Tmap.png"></p>
 <p>Este mapa tiene píxeles de $0.5'$, correspondientes al tamaño de los píxeles en los mapas de ACT y SPT. Deberán comparar mapas de diferentes resoluciones usando distintos valores de cortes en $\ell$. Deberán además discutir cómo se compara este mapa con un mapa real del CMB: ¿qué elementos faltó considerar para tener un mapa realista a estas escalas y con esta resolución?</p>
 <p>Noten que distintas realizaciones del campo Gaussiano de fluctuaciones primordiales entregarán distintos mapas con espectro de potencias idéntico. Por supuesto, no es necesario que implementen la transformada de Fourier ustedes mismos; pueden usar la Transformada de Fourier Rápida (FFT) para hacer los cálculos de arriba.</p>
 
@@ -13203,7 +13203,7 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Parte-3.-Estimaci&#243;n-de-par&#225;metros-cosmol&#243;gicos">Parte 3. Estimaci&#243;n de par&#225;metros cosmol&#243;gicos<a class="anchor-link" href="#Parte-3.-Estimaci&#243;n-de-par&#225;metros-cosmol&#243;gicos">&#182;</a></h1><p><strong>En la última parte deberán identificar los parámetros cosmológicos</strong> aproximados con los que se generó el espectro de potencias inicial. Para esto, deberán usar <code>CAMB</code>, disponible como ejecutable escrito en <code>FORTRAN</code> y como paquete en <code>python</code>. Deberán generar espectros de potencias modificando los parámetros $\Omega_\mathrm{c}h^2$ y $\Omega_\mathrm{b}h^2$ (el resto de parámetros corresponden todos a los valores incorporados en el ejemplo <a href="https://camb.readthedocs.io/en/latest/CAMBdemo.html">aquí</a>):</p>
+<h1 id="Parte-3.-Estimaci&#243;n-de-par&#225;metros-cosmol&#243;gicos">Parte 3. Estimaci&#243;n de par&#225;metros cosmol&#243;gicos<a class="anchor-link" href="#Parte-3.-Estimaci&#243;n-de-par&#225;metros-cosmol&#243;gicos">&#182;</a></h1><p><strong>En la última parte deberán identificar los parámetros cosmológicos</strong> aproximados con los que se generó el espectro de potencias inicial. Para esto, deberán usar <code>CAMB</code>, disponible como ejecutable escrito en <code>FORTRAN</code> y como paquete en <code>python</code>. Deberán generar espectros de potencias modificando los parámetros $\Omega_\mathrm{c}h^2$ y $\Omega_\mathrm{b}h^2$; el resto de parámetros corresponden todos a los valores incorporados en el ejemplo <a href="https://camb.readthedocs.io/en/latest/CAMBdemo.html">aquí</a>:</p>
 <table>
 <thead><tr>
 <th style="text-align:center">$A_s$</th>
@@ -13237,9 +13237,17 @@ $$</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Referencias">Referencias<a class="anchor-link" href="#Referencias">&#182;</a></h1><p>Éstos son sólo algunos ejemplos:</p>
 <ul>
-<li><a href="https://ui.adsabs.harvard.edu/abs/2017JCAP...06..031L/abstract">https://ui.adsabs.harvard.edu/abs/2017JCAP...06..031L/abstract</a></li>
-<li><a href="https://ui.adsabs.harvard.edu/abs/2018ApJ...852...97H/references">https://ui.adsabs.harvard.edu/abs/2018ApJ...852...97H/references</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/2017JCAP...06..031L/abstract">Louis et al. (2017)</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/2018ApJ...852...97H/abstract">Henning et al. (2018)</a></li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Entrega">Entrega<a class="anchor-link" href="#Entrega">&#182;</a></h1><p>Como la tarea anterior, ésta deberá ser entregada como (parte de) un repositorio en algún servidor <code>git</code>, incluyendo la fuente (ej. Latex) y un pdf del reporte, además de los códigos utilizados para hacer tanto los cálculos como los gráficos.</p>
 
 </div>
 </div>
