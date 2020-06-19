@@ -13084,7 +13084,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>El objetivo de esta tarea es analizar un mapa ficticio del CMB e identificar los parámetros cosmológicos usados para generarlo.</p>
+<p>El objetivo de esta tarea es analizar un mapa ficticio del CMB e identificar los parámetros cosmológicos usados para generarlo. Para esto deberán utilizar <code>CAMB</code> (<a href="https://camb.info/">https://camb.info/</a>), en cualquiera de sus versiones.</p>
 
 </div>
 </div>
@@ -13092,8 +13092,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Parte-1.-Generar-un-mapa-del-CMB">Parte 1. Generar un mapa del CMB<a class="anchor-link" href="#Parte-1.-Generar-un-mapa-del-CMB">&#182;</a></h2><p>Comenzamos con un espectro de potencias, que puede ser descargado de: <a href="https://lambda.gsfc.nasa.gov/toolbox/tb_camb_form.cfm">https://lambda.gsfc.nasa.gov/toolbox/tb_camb_form.cfm</a>. De aquí obtendrán los espectros de potencia de temperatura y polarización. Trabajaremos sólo con los de temperatura. Recuerden descargar el archivo <code>.log</code>, que contiene los parámetros con los que se generó el espectro de potencias. Aquí hay un ejemplo del resultado:</p>
-<p><img src="../tareas_data/tarea2/cmb_Dell_fid.png" width=500px></p>
+<h2 id="Parte-1.-Generar-un-mapa-del-CMB">Parte 1. Generar un mapa del CMB<a class="anchor-link" href="#Parte-1.-Generar-un-mapa-del-CMB">&#182;</a></h2><p>Para esta tarea deberán usar el espectro angular de potencias de temperatura provisto junto con este enunciado, disponible en el repositorio del curso, que se muestra a continuación:</p>
+<p><img src="./D_ell.png"></p>
 
 </div>
 </div>
@@ -13101,13 +13101,13 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Este espectro corresponde a la componente <code>unlensed_scalar</code> entregada por <code>CAMB</code>.</p>
 <p>Noten las unidades del eje vertical. Noten también que la curva empieza en $\ell=2$. ¿Qué pasa con $\ell=0,1$?</p>
 <p><strong>La primera parte consiste en generar un mapa de $10^\circ\times10^\circ$ a partir de este espectro de potencias.</strong> Este tamaño de mapa nos permite trabajar en la aproximación de cielo plano (de otro modo tendríamos que trabajar con esféricos armónicos).</p>
 <p>El espectro de potencias está en función de $\ell$, que se relaciona al ángulo en el cielo (y al número de onda, $k$) a través de $\ell=2\pi k=2\pi/\theta$, donde $\theta$ está en radianes. Podemos generar un mapa en espacio de Fourier,
 $$
 \mathbf{\tilde M}(\ell_x,\ell_y) = C\left(\sqrt{\ell_x^2+\ell_y^2}\right)
 $$</p>
-<p>INSERTAR IMAGEN DEL MAPA EN ESPACIO FOURIER</p>
 
 </div>
 </div>
@@ -13131,7 +13131,7 @@ $$
 \mathbf{\tilde G}(\ell_x,\ell_y) =
     \int d\ell_x \int d\ell_y \exp\left[-2i(\vec\ell\cdot\vec\theta)\right] \, \mathcal{N}(\mu,\sigma)
 $$<p>(Para el valor de $\sigma$, consideren que éste determina la amplitud de las fluctuaciones <em>respecto del espectro de potencias $C_\ell$</em>.) Deberían obtener una imagen similar (pero no idéntica) la que se muestra a continuación:</p>
-<p><img src='../tareas_data/tarea2/cmb_Tmap.png' width=500px></p>
+<p><img src="./cmb_Tmap.png"></p>
 <p>Este mapa tiene píxeles de $0.5'$, correspondientes al tamaño de los píxeles en los mapas de ACT y SPT. Deberán comparar mapas de diferentes resoluciones usando distintos valores de cortes en $\ell$. Deberán además discutir cómo se compara este mapa con un mapa real del CMB: ¿qué elementos faltó considerar para tener un mapa realista a estas escalas y con esta resolución?</p>
 <p>Noten que distintas realizaciones del campo Gaussiano de fluctuaciones primordiales entregarán distintos mapas con espectro de potencias idéntico. Por supuesto, no es necesario que implementen la transformada de Fourier ustedes mismos; pueden usar la Transformada de Fourier Rápida (FFT) para hacer los cálculos de arriba.</p>
 
@@ -13152,7 +13152,7 @@ $$<p>(Para el valor de $\sigma$, consideren que éste determina la amplitud de l
 <h3 id="2.1-Apodizaci&#243;n">2.1 Apodizaci&#243;n<a class="anchor-link" href="#2.1-Apodizaci&#243;n">&#182;</a></h3><p>Si tomáramos la transformada de Fourier del mapa directamente, tendríamos problemas por la discontinuidad en los bordes del mapa. Para evitar esto, el mapa se <strong>apodiza</strong> - es decir, se multiplica por una función que lo haga decaer suavemente a cero en los bordes:</p>
 $$
 \mathbf{M}_\mathrm{apod}(\theta_x,\theta_y) = \mathbf{M}(\theta_x,\theta_y) \circ \mathbf{W}(\theta_x,\theta_y)
-$$<p>donde $\circ$ es el operador multiplicador por elementos (producto de Hadamard).</p>
+$$<p>donde $\circ$ es el operador multiplicador por elementos (producto de Hadamard). La función a usar queda a su elección (pueden buscar alguna referencia o explorar distintas funciones); deberán justificar su elección y mostrar el mapa apodizado.</p>
 
 </div>
 </div>
@@ -13160,7 +13160,7 @@ $$<p>donde $\circ$ es el operador multiplicador por elementos (producto de Hadam
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.2-Espectro-de-potencias">2.2 Espectro de potencias<a class="anchor-link" href="#2.2-Espectro-de-potencias">&#182;</a></h3><p>El espectro de potencias se calcula tomando la transformada de Fourier (en 2d) del mapa apodizado, recordando que $\ell = 2\pi k \equiv 2\pi\sqrt{k_x^2+k_y^2}$, y luego promediando en anillos en $\ell$,
+<h3 id="2.2-Espectro-de-potencias">2.2 Espectro de potencias<a class="anchor-link" href="#2.2-Espectro-de-potencias">&#182;</a></h3><p>El espectro de potencias se calcula tomando la transformada de Fourier (en 2d) del mapa apodizado, recordando que $\ell = 2\pi k \equiv 2\pi\sqrt{k_x^2+k_y^2}$, 
 $$
 \mathbf{\tilde M}(\ell_x,\ell_y) = \mathrm{FFT}\left(\mathbf{M}_\mathrm{apod}(\theta_x,\theta_y)\right)
 $$</p>
@@ -13179,15 +13179,15 @@ $$</p>
 $$
 \hat D_\ell = T_\ell*D_\ell + N_\ell
 $$</p>
-<p>donde $D_\ell$ es el verdadero espectro de potencias, $\hat D_\ell$ es el espectro de potencias estimado, $T_\ell$ es la <em>función de transferencia</em> y $N_\ell$ es el <em>sesgo de ruido</em>, de manera que el espectro de potencias real es
+<p>donde $D_\ell$ es el verdadero espectro de potencias, $\hat D_\ell$ es el espectro de potencias estimado, $T_\ell$ es la <em>función de transferencia</em> y $N_\ell$ es el <em>sesgo de ruido</em>. Así, el espectro de potencias real corresponde a
 $$
 D_\ell = \frac{(\hat D_\ell - N_\ell)}{T_\ell}
 $$</p>
-<p>Estos sesgos pueden estimarse usando mapas simulados donde el espectro de potencias es conocido - justamente la situación aquí. Noten que en la primera parte hay una componente aleatoria - el campo primordial de fluctuaciones</p>
+<p>Estos sesgos pueden estimarse usando mapas simulados donde el espectro de potencias es conocido - justamente la situación aquí. Noten que en la primera parte hay una componente aleatoria - el campo primordial de fluctuaciones - que les permite generar mapas distintos a partir de un único espectro de potencias.</p>
 <p><strong>Sesgo de ruido</strong></p>
-<p>Noten que el sesgo de ruido existe aunque la señal verdadera sea cero - y así es exactamente como se estima: generando mapas que sólo contienen ruido (i.e., $\mathbf{\tilde G}(\ell_x,\ell_y)$) y calculando el espectro de potencias resultante.</p>
+<p>Noten que el sesgo de ruido existe aunque la señal verdadera sea cero - y así es exactamente como se estima: generando mapas que sólo contienen ruido (i.e., $\mathbf{\tilde G}(\ell_x,\ell_y)$); el espectro de potencias resultante es $N_\ell$.</p>
 <p><strong>Función de transferencia</strong></p>
-<p>La función de transferencia es una corrección multiplicativa al espectro de potencias, y depende principalmente del tamaño finito del mapa y la resolución del telescopio. la función de transferencia puede calcularse usando mapas simulados en los que se conoce el espectro de potencias que lo genera, y comparando el espectro resultante con el original.</p>
+<p>La función de transferencia es una corrección multiplicativa al espectro de potencias, y depende principalmente del tamaño finito del mapa y la resolución del telescopio. la función de transferencia puede calcularse usando mapas simulados en los que se conoce el espectro de potencias que lo genera, y comparando el espectro resultante con el original. A pesar de ser generados a partir del mismo espectro de potencias, los mapas no serán los mismos por la componente aleatoria introducida arriba.</p>
 
 </div>
 </div>
@@ -13195,12 +13195,7 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Parte-3.-Estimaci&#243;n-de-par&#225;metros-cosmol&#243;gicos">Parte 3. Estimaci&#243;n de par&#225;metros cosmol&#243;gicos<a class="anchor-link" href="#Parte-3.-Estimaci&#243;n-de-par&#225;metros-cosmol&#243;gicos">&#182;</a></h1><p><strong>En la última parte deberán identificar los parámetros cosmológicos</strong> aproximados con los que se generó el espectro de potencias inicial. Para esto, deberán descargar un número de espectros de potencias desde el mismo sitio, modificando los parámetros $H_0$ y $\Omega_\mathrm{b}$ (el resto de parámetros corresponden todos a los valores incorporados por defecto en esta página). Deberán producir un "mapa" cuantificando la diferencia entre cada uno de los espectros resultantes y el espectro entregado en esta tarea, con alguna métrica de su elección, dependiendo del valor de estos dos parámetros (no es necesario que el mapa llene el gráfico; una vez que identifiquen los parámetros pueden detenerse). La precisión con que determinen los parámetros no es demasiado importante; lo importante es que presenten un rango acotado para estos dos parámetros y que discutan qué efectos producen las variaciones de estos parámetros en el espectro de potencias.</p>
-<p>Recuerden que
-$$
-t_H = \frac1{H_0}\int_0^1\frac{da}{aE(a)}
-$$
-y que $\Omega_r=0$.</p>
+<p>Con estos ingredientes ya pueden calcular el espectro de potencias. ¿Cómo se compara con el espectro entregado?</p>
 
 </div>
 </div>
@@ -13208,26 +13203,46 @@ y que $\Omega_r=0$.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Referencias">Referencias<a class="anchor-link" href="#Referencias">&#182;</a></h1><ul>
+<h1 id="Parte-3.-Estimaci&#243;n-de-par&#225;metros-cosmol&#243;gicos">Parte 3. Estimaci&#243;n de par&#225;metros cosmol&#243;gicos<a class="anchor-link" href="#Parte-3.-Estimaci&#243;n-de-par&#225;metros-cosmol&#243;gicos">&#182;</a></h1><p><strong>En la última parte deberán identificar los parámetros cosmológicos</strong> aproximados con los que se generó el espectro de potencias inicial. Para esto, deberán usar <code>CAMB</code>, disponible como ejecutable escrito en <code>FORTRAN</code> y como paquete en <code>python</code>. Deberán generar espectros de potencias modificando los parámetros $\Omega_\mathrm{c}h^2$ y $\Omega_\mathrm{b}h^2$ (el resto de parámetros corresponden todos a los valores incorporados en el ejemplo <a href="https://camb.readthedocs.io/en/latest/CAMBdemo.html">aquí</a>):</p>
+<table>
+<thead><tr>
+<th style="text-align:center">$A_s$</th>
+<th style="text-align:center">$n_s$</th>
+<th style="text-align:center">$r$</th>
+<th style="text-align:center">$H_0$ (km s$^{-1}$ Mpc$^{-1}$)</th>
+<th style="text-align:center">$\sum m_\nu$ (eV)</th>
+<th style="text-align:center">$\Omega_k$</th>
+<th style="text-align:center">$\tau$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$2\times10^{-9}$</td>
+<td style="text-align:center">$0.965$</td>
+<td style="text-align:center">$0.00$</td>
+<td style="text-align:center">$67.5$</td>
+<td style="text-align:center">$0.06$</td>
+<td style="text-align:center">$0.00$</td>
+<td style="text-align:center">$0.06$</td>
+</tr>
+</tbody>
+</table>
+<p>Deberán producir un "mapa" (opcionalmente de contornos) cuantificando la diferencia entre cada uno de los espectros resultantes y el espectro entregado en esta tarea, con alguna métrica de su elección, dependiendo de los valores de los dos parámetros mencionados. ¿Cuáles son los valores más probables para estos parámetros? Comenten sobre su resultado. Por ejemplo, ¿qué características identifican en el espectro de potencias que avalen los valores que encontraron? ¿Hay alguna degeneración entre estos parámetros, y a qué se debe?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Referencias">Referencias<a class="anchor-link" href="#Referencias">&#182;</a></h1><p>Éstos son sólo algunos ejemplos:</p>
+<ul>
 <li><a href="https://ui.adsabs.harvard.edu/abs/2017JCAP...06..031L/abstract">https://ui.adsabs.harvard.edu/abs/2017JCAP...06..031L/abstract</a></li>
 <li><a href="https://ui.adsabs.harvard.edu/abs/2018ApJ...852...97H/references">https://ui.adsabs.harvard.edu/abs/2018ApJ...852...97H/references</a></li>
 </ul>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
     </div>
   </div>
