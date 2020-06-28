@@ -8,6 +8,12 @@ recursos
 tareas_data
 
 # archivos genericos
+*~
 *.ipynb_checkpoints
 .DS_Store
 helper.ipynb
+
+# auxiliares de latex
+*.aux
+*.log
+*.out
